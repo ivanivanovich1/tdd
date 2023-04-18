@@ -1,5 +1,4 @@
 use crate::consts::API_URL;
-use crate::errors::NotFound;
 use colored::*;
 use reqwest::{
     header::{HeaderMap, HeaderValue, AUTHORIZATION},
@@ -166,17 +165,12 @@ pub async fn delete_task(id: u32) -> Result<(), Error> {
         .send()
         .await?;
 
-    let status = response.status();
+    if response.status().is_success() {
+        println!("{}", "Task was deleted!".green().bold());
+    } else {
+        let err: Value = serde_json::from_str(&response.text().await?).unwrap();
 
-    match status {
-        reqwest::StatusCode::NOT_FOUND => {
-            let not_found: NotFound = serde_json::from_str(&response.text().await?).unwrap();
-
-            println!("{}", not_found.message.red().bold());
-        }
-        _ => {
-            println!("{}", "Task deleted".green().bold());
-        }
+        println!("{}", format!("Error: {}", err["message"]).red().bold());
     }
 
     Ok(())
