@@ -1,6 +1,6 @@
 ## tdd
 
--- This app is written only for demonstration purposes.
+> This app is written only for demonstration purposes.
 
 Solution for the [Exercise 3 - To-do list client application](https://github.com/timotr/harjutused/blob/main/hajusrakendused/todo-client.md) written in Rust. 
 
