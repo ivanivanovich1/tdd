@@ -20,9 +20,15 @@ git clone https://github.com/ivanivanovich1/tdd
 cd tdd
 cargo run
 ```
+This will launch the program in a development environment. 
 
-### Token etc. 
+In order to build a binary file, command
+```
+cargo build --release
+```
+could be used.
 
-If you don't have a token.txt file, then the you would need to register a new user. 
-
-For further information use `-h`.
+For further information use:
+```
+cargo r -- -h
+```
